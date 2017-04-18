@@ -1,0 +1,7 @@
+#
+# Symlink Commands
+#
+#   Script to make symlinks into the users home directory
+#
+
+ln -s .bash_profile ~/.bash_profile
