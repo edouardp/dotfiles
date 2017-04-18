@@ -55,17 +55,26 @@ function initial_colour() {
     (exit $RETVAL)  # Set $? via hideous hack
 }
 
+
 function initial_char() {
     RETVAL=$? 
     if [[ $RETVAL -ne 0 ]]; then
         echo "";
     else
-        echo "";
+        if [ -f /etc/os-release ]
+        then
+            echo  ""
+        else
+            echo ""
+        fi
+        #echo $OSCHAR
         #echo "";
         #echo "";
         #echo "";
     fi
 }
+
+
 
 export PS1="\[\$(initial_colour)\]\`initial_char\` \[\e[38;5;99m\]\h \[\e[38;5;45m\]\w\[\e[38;5;226m\]\`parse_git_branch\` \[\e[38;5;15m\] "
 
