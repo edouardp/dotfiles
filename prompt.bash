@@ -54,7 +54,8 @@ function initial_char() {
     else
         if [ -f /etc/os-release ]
         then
-            echo  ""
+            if grep -iq ubuntu /etc/os-release; then echo ""; fi
+            if grep -iq raspbian /etc/os-release; then echo ""; fi
         else
             echo ""
         fi
