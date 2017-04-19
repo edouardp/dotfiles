@@ -16,12 +16,20 @@ function parse_git_dirty {
     dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
     untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
     ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+    behind=`echo -n "${status}" 2> /dev/null | grep "Your branch is behind" &> /dev/null; echo "$?"`
+    diverged=`echo -n "${status}" 2> /dev/null | grep "have diverged" &> /dev/null; echo "$?"`
     newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
     renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
     deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
     bits=''
     if [ "${ahead}" == "0" ]; then
         bits=" ${bits}"
+    fi
+    if [ "${behind}" == "0" ]; then
+        bits=" ${bits}"
+    fi
+    if [ "${diverged}" == "0" ]; then
+        bits=" ${bits}"
     fi
     if [ "${renamed}" == "0" ] || [ "${newfile}" == "0" ] || [ "${deleted}" == "0" ] || [ "${dirty}" == "0" ]; then
         bits=" ${bits}"
